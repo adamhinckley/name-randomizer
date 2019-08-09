@@ -6,18 +6,13 @@ function App() {
   const [value, setValue] = React.useState("");
   const [currentName, setCurrentName] = React.useState("");
   const [shuffled, setShuffled] = React.useState(false);
-  let [count, setCount] = React.useState(0);
+  let [count, setCount] = React.useState(1);
 
   const addNames = e => {
     e.preventDefault();
     setNames(value.split("\n"));
-
-    setTimeout(500);
-
-    // nextStudent(e, names);
-
-    console.log("names", names);
   };
+  // console.log("names", names);
 
   const handleChange = e => {
     setValue(e.target.value);
@@ -42,22 +37,39 @@ function App() {
   };
 
   const nextStudent = (e, arr) => {
-    // e.preventDefault();
+    e.preventDefault();
     console.log("next fired");
 
     if (count < arr.length) {
+      // await setCurrentName(arr[count]);
       setCurrentName(arr[count]);
       setCount(count + 1);
-      console.log("current name", currentName);
     } else if (count >= arr.length && count !== 0) {
       setCurrentName("finished");
     }
   };
+
+  const prevStudent = arr => {
+    // setCurrentName(arr[count]);
+    if (count > 1) {
+      setCurrentName(names[count - 1]);
+      setCount(count - 1);
+    } else if (count === 1) {
+      setCurrentName(names[0]);
+    }
+  };
+  console.log("count", count);
+  console.log("name", currentName);
+  // console.log("first name", names[0]);
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>
-          Build Sprint Draft <span role="img">🎉</span>
+          Build Sprint Draft{" "}
+          <span role="img" alt="party">
+            🎉
+          </span>
         </h1>
       </header>
       {!names.length ? (
@@ -78,13 +90,24 @@ function App() {
         <>
           {removeEmptyStringFromEnd(names)}
           {shuffle(names)}
+          <button onClick={e => prevStudent(e, names)}>previous Student</button>
           <button onClick={e => nextStudent(e, names)}>Next Student</button>
-          <p>Remaining students: {names.length - count}</p>
+          <p>
+            Remaining students:{" "}
+            {names.length > 0 && currentName !== "finished"
+              ? names.length - count + 1
+              : 0}
+          </p>
         </>
       ) : null}
 
-      {/* {currentName !== "finished" && shuffled ? <p>Next up: {currentName}</p> : null} */}
-      {currentName === "finished" ? <p>finished</p> : <p>Next up: {currentName}</p>}
+      {currentName === "finished" ? (
+        <>
+          <p>finished</p>
+          <button>Start Over</button>
+        </>
+      ) : null}
+      {names.length && currentName !== "finished" ? <p>Next up: {currentName}</p> : null}
       {names.map(name => {
         return <p key={name}>{name}</p>;
       })}
