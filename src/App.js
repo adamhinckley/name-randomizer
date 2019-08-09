@@ -69,6 +69,7 @@ function App() {
     setShuffled(false);
     setCount(1);
     setNames([]);
+    console.log("start over fired");
   };
 
   return (
@@ -118,16 +119,18 @@ function App() {
         {currentName === "finished" ? (
           <>
             <p>finished</p>
-            {/* <button>Start Over</button> */}
+            {/* <button onClick={e => startOver()} className="start-over">
+              Start Over
+            </button> */}
           </>
         ) : null}
         {names.length && currentName !== "finished" ? (
-          <>
+          <div className="student">
             <strong>{currentName}</strong>
-            <button onClick={e => startOver()} className="start-over">
+            {/* <button onClick={e => startOver()} className="start-over">
               Start Over
-            </button>
-          </>
+            </button> */}
+          </div>
         ) : null}
 
         {/* {names.map(name => {
