@@ -41,22 +41,30 @@ function App() {
     console.log("next fired");
 
     if (count < arr.length) {
-      // await setCurrentName(arr[count]);
       setCurrentName(arr[count]);
       setCount(count + 1);
-    } else if (count >= arr.length && count !== 0) {
+    } else if ((count = arr.length)) {
       setCurrentName("finished");
     }
   };
 
-  const prevStudent = arr => {
-    // setCurrentName(arr[count]);
-    if (count > 1) {
-      setCurrentName(names[count - 1]);
+  const prevStudent = (e, arr) => {
+    e.preventDefault();
+
+    if (count > 0) {
       setCount(count - 1);
-    } else if (count === 1) {
-      setCurrentName(names[0]);
+      setCurrentName(arr[count]);
     }
+
+    // setCurrentName(arr[count]);
+    // if (count > 1) {
+    //   setCurrentName(arr[count - 1]);
+    //   setCount(count - 1);
+    // } else if (count === 1) {
+    //   setCurrentName(arr[0]);
+    // } else if (count === arr.length) {
+    //   setCurrentName(arr[arr.length]);
+    // }
   };
   console.log("count", count);
   console.log("name", currentName);
@@ -104,7 +112,7 @@ function App() {
       {currentName === "finished" ? (
         <>
           <p>finished</p>
-          <button>Start Over</button>
+          {/* <button>Start Over</button> */}
         </>
       ) : null}
       {names.length && currentName !== "finished" ? <p>Next up: {currentName}</p> : null}
