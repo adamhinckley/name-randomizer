@@ -106,7 +106,7 @@ function App() {
             {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
             <button onClick={e => nextStudent(e, names)}>Next Student</button>
             <p>
-              Remaining students:{" "}
+              Remaining Students:{" "}
               <strong>
                 {names.length > 0 && currentName !== "finished"
                   ? names.length - count + 1
@@ -118,7 +118,16 @@ function App() {
 
         {currentName === "finished" ? (
           <>
-            <p>finished</p>
+            <p>
+              {" "}
+              <span role="img" alt="party">
+                🎉
+              </span>
+              Finished{" "}
+              <span role="img" alt="party">
+                🎉
+              </span>
+            </p>
             {/* <button onClick={e => startOver()} className="start-over">
               Start Over
             </button> */}
