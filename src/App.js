@@ -73,66 +73,67 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>
-          Build Sprint Draft{" "}
-          <span role="img" alt="party">
-            🎉
-          </span>
-        </h1>
-      </header>
-      {!names.length ? (
-        <form>
-          <p className="instructions">
-            Paste your students' names, one per line. The order of the names will be
-            randomized and served up one at a time after they are submitted.
-          </p>
-          <textarea
-            name="names"
-            value={value}
-            cols="30"
-            rows="10"
-            onChange={handleChange}
-          />
-          <button onClick={e => addNames(e, names)}>Submit Names</button>
-        </form>
-      ) : null}
-      {/* {!shuffled ? <button onClick={shuffle(names)}>shuffle</button> : null} */}
-      {names.length ? (
-        <>
-          {removeEmptyStringFromEnd(names)}
-          {shuffle(names)}
-          {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
-          <button onClick={e => nextStudent(e, names)}>Next Student</button>
-          <p>
-            Remaining students:{" "}
-            <strong>
-              {names.length > 0 && currentName !== "finished"
-                ? names.length - count + 1
-                : 0}
-            </strong>
-          </p>
-        </>
-      ) : null}
+      <div className="container">
+        <header className="App-header">
+          <h1>
+            Build Sprint Draft{" "}
+            <span role="img" alt="party">
+              🎉
+            </span>
+          </h1>
+        </header>
+        {!names.length ? (
+          <form>
+            <p className="instructions">
+              Paste your students' names, one per line. The order of the names will be
+              randomized and served up one at a time after they are submitted.
+            </p>
+            <textarea
+              name="names"
+              value={value}
+              cols="30"
+              rows="10"
+              onChange={handleChange}
+            />
+            <button onClick={e => addNames(e, names)}>Submit Names</button>
+          </form>
+        ) : null}
+        {names.length ? (
+          <>
+            {removeEmptyStringFromEnd(names)}
+            {shuffle(names)}
+            {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
+            <button onClick={e => nextStudent(e, names)}>Next Student</button>
+            <p>
+              Remaining students:{" "}
+              <strong>
+                {names.length > 0 && currentName !== "finished"
+                  ? names.length - count + 1
+                  : 0}
+              </strong>
+            </p>
+          </>
+        ) : null}
 
-      {currentName === "finished" ? (
-        <>
-          <p>finished</p>
-          {/* <button>Start Over</button> */}
-        </>
-      ) : null}
-      {names.length && currentName !== "finished" ? (
-        <>
-          <strong>{currentName}</strong>
-          <button onClick={e => startOver()} className="start-over">
-            Start Over
-          </button>
-        </>
-      ) : null}
+        {currentName === "finished" ? (
+          <>
+            <p>finished</p>
+            {/* <button>Start Over</button> */}
+          </>
+        ) : null}
+        {names.length && currentName !== "finished" ? (
+          <>
+            <strong>{currentName}</strong>
+            <button onClick={e => startOver()} className="start-over">
+              Start Over
+            </button>
+          </>
+        ) : null}
 
-      {/* {names.map(name => {
+        {/* {names.map(name => {
         return <p key={name}>{name}</p>;
       })} */}
+      </div>
     </div>
   );
 }
