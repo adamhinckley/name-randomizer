@@ -117,11 +117,7 @@ function App() {
           {/* <button>Start Over</button> */}
         </>
       ) : null}
-      {names.length && currentName !== "finished" ? (
-        <p>
-          Next up: <strong>{currentName}</strong>
-        </p>
-      ) : null}
+      {names.length && currentName !== "finished" ? <strong>{currentName}</strong> : null}
       {/* {names.map(name => {
         return <p key={name}>{name}</p>;
       })} */}
