@@ -65,6 +65,12 @@ function App() {
   console.log("name", currentName);
   // console.log("first name", names[0]);
 
+  const startOver = () => {
+    setShuffled(false);
+    setCount(1);
+    setNames([]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -77,11 +83,9 @@ function App() {
       </header>
       {!names.length ? (
         <form>
-          <p>
-            Paste your students' names, one per line.
-            <br />
-            The order of the names will be randomized and served <br />
-            up one at a time after they are submitted.
+          <p className="instructions">
+            Paste your students' names, one per line. The order of the names will be
+            randomized and served up one at a time after they are submitted.
           </p>
           <textarea
             name="names"
@@ -117,7 +121,15 @@ function App() {
           {/* <button>Start Over</button> */}
         </>
       ) : null}
-      {names.length && currentName !== "finished" ? <strong>{currentName}</strong> : null}
+      {names.length && currentName !== "finished" ? (
+        <>
+          <strong>{currentName}</strong>
+          <button onClick={e => startOver()} className="start-over">
+            Start Over
+          </button>
+        </>
+      ) : null}
+
       {/* {names.map(name => {
         return <p key={name}>{name}</p>;
       })} */}

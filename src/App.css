@@ -1,25 +1,21 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   max-width: 600px;
   margin: 0 auto;
   color: #3f68f1;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #3f68f1;
 }
 
+.instructions {
+  width: 355px;
+  text-align: left;
+}
+
+.start-over {
+  margin-top: 20px;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -29,6 +25,7 @@ form {
 textarea {
   width: 300px;
   margin-bottom: 20px;
+  border-color: #3f68f1;
 }
 
 /* p {
@@ -40,4 +37,5 @@ button {
   border-color: #3f68f1;
   color: #3f68f1;
   height: 30px;
+  cursor: pointer;
 }
