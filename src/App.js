@@ -51,20 +51,15 @@ function App() {
   const prevStudent = (e, arr) => {
     e.preventDefault();
 
-    if (count > 0) {
-      setCount(count - 1);
-      setCurrentName(arr[count]);
-    }
-
     // setCurrentName(arr[count]);
-    // if (count > 1) {
-    //   setCurrentName(arr[count - 1]);
-    //   setCount(count - 1);
-    // } else if (count === 1) {
-    //   setCurrentName(arr[0]);
-    // } else if (count === arr.length) {
-    //   setCurrentName(arr[arr.length]);
-    // }
+    if (count > 1) {
+      setCurrentName(arr[count - 1]);
+      setCount(count - 1);
+    } else if (count === 1) {
+      setCurrentName(arr[0]);
+    } else if (count === arr.length) {
+      setCurrentName(arr[arr.length]);
+    }
   };
   console.log("count", count);
   console.log("name", currentName);
@@ -82,7 +77,12 @@ function App() {
       </header>
       {!names.length ? (
         <form>
-          <p>Paste your students' names, one per line</p>
+          <p>
+            Paste your students' names, one per line.
+            <br />
+            The order of the names will be randomized and served <br />
+            up one at a time after they are submitted.
+          </p>
           <textarea
             name="names"
             value={value}
@@ -98,13 +98,15 @@ function App() {
         <>
           {removeEmptyStringFromEnd(names)}
           {shuffle(names)}
-          <button onClick={e => prevStudent(e, names)}>previous Student</button>
+          {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
           <button onClick={e => nextStudent(e, names)}>Next Student</button>
           <p>
             Remaining students:{" "}
-            {names.length > 0 && currentName !== "finished"
-              ? names.length - count + 1
-              : 0}
+            <strong>
+              {names.length > 0 && currentName !== "finished"
+                ? names.length - count + 1
+                : 0}
+            </strong>
           </p>
         </>
       ) : null}
@@ -115,10 +117,14 @@ function App() {
           {/* <button>Start Over</button> */}
         </>
       ) : null}
-      {names.length && currentName !== "finished" ? <p>Next up: {currentName}</p> : null}
-      {names.map(name => {
+      {names.length && currentName !== "finished" ? (
+        <p>
+          Next up: <strong>{currentName}</strong>
+        </p>
+      ) : null}
+      {/* {names.map(name => {
         return <p key={name}>{name}</p>;
-      })}
+      })} */}
     </div>
   );
 }
