@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { Helmet } from "react-helmet";
 
 function App() {
   const [names, setNames] = React.useState([]);
@@ -65,16 +66,19 @@ function App() {
   console.log("name", currentName);
   // console.log("first name", names[0]);
 
-  const startOver = () => {
-    setShuffled(false);
-    setCount(1);
-    setNames([]);
-    console.log("start over fired");
-  };
+  // const startOver = () => {
+  //   setShuffled(false);
+  //   setCount(1);
+  //   setNames([]);
+  //   console.log("start over fired");
+  // };
 
   return (
     <div className="App">
       <div className="container">
+        <Helmet>
+          <title>Student: {currentName}</title>
+        </Helmet>
         <header className="App-header">
           <h1>
             Build Sprint Draft{" "}
@@ -103,7 +107,7 @@ function App() {
           <>
             {removeEmptyStringFromEnd(names)}
             {shuffle(names)}
-            {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
+            <button onClick={e => prevStudent(e, names)}>previous Student</button>
             <button onClick={e => nextStudent(e, names)}>Next Student</button>
             <p>
               Remaining Students:{" "}
@@ -143,8 +147,8 @@ function App() {
         ) : null}
 
         {/* {names.map(name => {
-        return <p key={name}>{name}</p>;
-      })} */}
+          return <p key={name}>{name}</p>;
+        })} */}
       </div>
     </div>
   );
