@@ -77,7 +77,7 @@ function App() {
     <div className="App">
       <div className="container">
         <Helmet>
-          <title>Student: {currentName}</title>
+          <title>Build Sprint Draft {currentName}</title>
         </Helmet>
         <header className="App-header">
           <h1>
