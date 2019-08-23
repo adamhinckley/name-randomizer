@@ -76,9 +76,7 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Helmet>
-          <title>Build Sprint Draft {currentName}</title>
-        </Helmet>
+        <Helmet>{currentName !== "" ? <title> next: {currentName}</title> : null}</Helmet>
         <header className="App-header">
           <h1>
             Build Sprint Draft{" "}
@@ -107,7 +105,7 @@ function App() {
           <>
             {removeEmptyStringFromEnd(names)}
             {shuffle(names)}
-            <button onClick={e => prevStudent(e, names)}>previous Student</button>
+            {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
             <button onClick={e => nextStudent(e, names)}>Next Student</button>
             <p>
               Remaining Students:{" "}
