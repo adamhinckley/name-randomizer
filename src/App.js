@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Helmet } from "react-helmet";
 
 function App() {
-  const [names, setNames] = React.useState([]);
-  const [value, setValue] = React.useState("");
-  const [currentName, setCurrentName] = React.useState("");
-  const [shuffled, setShuffled] = React.useState(false);
-  let [count, setCount] = React.useState(1);
+  const [names, setNames] = useState([]);
+  const [value, setValue] = useState("");
+  const [currentName, setCurrentName] = useState("");
+  const [shuffled, setShuffled] = useState(false);
+  let [count, setCount] = useState(0);
 
   const addNames = e => {
     e.preventDefault();
     setNames(value.split("\n"));
   };
-  // console.log("names", names);
 
   const handleChange = e => {
     setValue(e.target.value);
@@ -37,41 +36,27 @@ function App() {
     }
   };
 
-  const nextStudent = (e, arr) => {
+  const nextStudent = e => {
     e.preventDefault();
-    console.log("next fired");
-
-    if (count < arr.length) {
-      setCurrentName(arr[count]);
-      setCount(count + 1);
-    } else if ((count = arr.length)) {
-      setCurrentName("finished");
+    if (names.length && count <= names.length - 1) {
+      setCount(prevCount => prevCount + 1);
     }
   };
 
-  const prevStudent = (e, arr) => {
+  const prevStudent = e => {
     e.preventDefault();
-
-    // setCurrentName(arr[count]);
-    if (count > 1) {
-      setCurrentName(arr[count - 1]);
-      setCount(count - 1);
-    } else if (count === 1) {
-      setCurrentName(arr[0]);
-    } else if (count === arr.length) {
-      setCurrentName(arr[arr.length]);
+    if (count >= 1) {
+      setCount(prevCount => prevCount - 1);
     }
   };
-  console.log("count", count);
-  console.log("name", currentName);
-  // console.log("first name", names[0]);
 
-  // const startOver = () => {
-  //   setShuffled(false);
-  //   setCount(1);
-  //   setNames([]);
-  //   console.log("start over fired");
-  // };
+  useEffect(() => {
+    if (names.length && count === names.length) {
+      setCurrentName("🎉Finished🎉");
+    } else if (names.length) {
+      setCurrentName(names[count]);
+    }
+  }, [names, count]);
 
   return (
     <div className="App">
@@ -105,13 +90,15 @@ function App() {
           <>
             {removeEmptyStringFromEnd(names)}
             {shuffle(names)}
-            {/* <button onClick={e => prevStudent(e, names)}>previous Student</button> */}
-            <button onClick={e => nextStudent(e, names)}>Next Student</button>
+            <div className="button-container">
+              <button onClick={e => prevStudent(e, names)}>previous Student</button>
+              <button onClick={e => nextStudent(e, names)}>Next Student</button>
+            </div>
             <p>
               Remaining Students:{" "}
               <strong>
                 {names.length > 0 && currentName !== "finished"
-                  ? names.length - count + 1
+                  ? names.length - count
                   : 0}
               </strong>
             </p>
@@ -130,17 +117,11 @@ function App() {
                 🎉
               </span>
             </p>
-            {/* <button onClick={e => startOver()} className="start-over">
-              Start Over
-            </button> */}
           </>
         ) : null}
         {names.length && currentName !== "finished" ? (
           <div className="student">
-            <strong>{currentName}</strong>
-            {/* <button onClick={e => startOver()} className="start-over">
-              Start Over
-            </button> */}
+            <strong> {currentName}</strong>
           </div>
         ) : null}
 

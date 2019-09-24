@@ -53,3 +53,8 @@ button {
   height: 30px;
   cursor: pointer;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+}
